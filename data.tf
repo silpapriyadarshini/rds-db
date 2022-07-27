@@ -1,22 +1,22 @@
-data "aws_vpc" "lab-vpc" {
+data "aws_vpc" "lab_vpc" {
     filter {
         name   = "tag:Name"
         values = ["lab-vpc"]
     }
 }
 
-data "aws_subnet" "data1" {
+data "aws_subnet" "data_a" {
     filter {
         name   = "tag:Name"
-        values = ["data1"]
+        values = ["data-a"]
     }
 }
 
-data "aws_subnet" "data2" {
-    filter {
-        name   = "tag:Name"
-        values = ["data2"]
-    }
+data "aws_subnet" "data_b" {
+  filter {
+    name   = "tag:Name"
+    values = ["data-b"]
+  }
 }
 
 data "aws_security_group" "ec2_server" {

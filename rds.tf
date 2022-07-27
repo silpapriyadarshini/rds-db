@@ -15,7 +15,7 @@ resource "aws_db_instance" "database_instance" {
 
 resource "aws_db_subnet_group" "database_subnet_group" {
   name       = "database_subnets"
-  subnet_ids = [data.aws_subnet.data1.id, data.aws_subnet.data2.id]
+  subnet_ids = [data.aws_subnet.data_a.id, data.aws_subnet.data_b.id]
   tags = {
     Name = "database_subnets"
   }

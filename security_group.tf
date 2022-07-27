@@ -1,7 +1,7 @@
 resource "aws_security_group" "my_sql_server" {
   name        = "mysql_server"
   description = "Allow connection for Mysql Server"
-  vpc_id      = data.aws_vpc.lab-vpc.id
+  vpc_id      = data.aws_vpc.lab_vpc.id
 
   ingress {
     description      = "Allow port 3306"
