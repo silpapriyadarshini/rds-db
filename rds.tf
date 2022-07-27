@@ -1,29 +1,22 @@
-resource "aws_db_instance" "database-instance" {
+resource "aws_db_instance" "database_instance" {
     allocated_storage       = 20
-    identifier              = "testinstance"
     engine                  = "mysql"
     engine_version          = "8.0"
     instance_class          = "db.t3.micro"
-    name                    = "test"
+    db_name                 = "test"
     username                = "silpa"
-    password                = "Silpa@1993"
-    parameter_group_name    = "database-instance.mysql8.0"
+    password                = jsondecode(data.aws_secretsmanager_secret_version.my_sql_passwrd_version.secret_string)["my_db_passwrd"]
     skip_final_snapshot     = true
-    db_subnet_group_name    = "aws_db_subnet_group.database-subnet-group.id"
     backup_retention_period = 1
-    multi_az                = var.multi_az
+    multi_az                = true
+    db_subnet_group_name    = aws_db_subnet_group.database_subnet_group.name
+    vpc_security_group_ids  = [aws_security_group.my_sql_server.id]
 }
 
-resource "aws_db_subnet_group" "database-subnet-group" {
-  name       = "database-subnets"
-  subnet_ids = ["aws_subnet.private.id", "aws_subnet.private1.id"]
-
+resource "aws_db_subnet_group" "database_subnet_group" {
+  name       = "database_subnets"
+  subnet_ids = [data.aws_subnet.data1.id, data.aws_subnet.data2.id]
   tags = {
-    Name = "db-subnet-group"
+    Name = "database_subnets"
   }
-}
-
-data "aws_db_snapshot" "db_snapshot" {
-  most_recent = true
-  db_instance_identifier = "testinstance"
 }
