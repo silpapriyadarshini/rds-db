@@ -26,10 +26,10 @@ data "aws_security_group" "ec2_server" {
   }
 }
 
-data "aws_secretsmanager_secret" "my_db_passwrd" {
-  name = "my_db_passwrd"
+data "aws_secretsmanager_secret" "mysql_password" {
+  name = "mysql_password"
 }
 
-data "aws_secretsmanager_secret_version" "my_sql_passwrd_version" {
-  secret_id = data.aws_secretsmanager_secret.my_db_passwd.id
+data "aws_secretsmanager_secret_version" "mysql_passwd_version" {
+  secret_id = data.aws_secretsmanager_secret.mysql_password.id
 }

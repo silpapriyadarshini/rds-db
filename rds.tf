@@ -5,7 +5,7 @@ resource "aws_db_instance" "database_instance" {
     instance_class          = "db.t3.micro"
     db_name                 = "test"
     username                = "silpa"
-    password                = jsondecode(data.aws_secretsmanager_secret_version.my_sql_passwrd_version.secret_string)["my_db_passwrd"]
+    password                = jsondecode(data.aws_secretsmanager_secret_version.mysql_passwd_version.secret_string)["mysql_password"]
     skip_final_snapshot     = true
     backup_retention_period = 1
     multi_az                = true
